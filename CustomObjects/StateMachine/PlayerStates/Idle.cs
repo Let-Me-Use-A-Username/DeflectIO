@@ -6,14 +6,8 @@ public partial class Idle : PlayerState
 {
 	Vector3 movementInput;
 
-	public override void _Ready()
+	public override void Process(double delta)
 	{
-		base._Ready();
-	}
-
-	public new void Process(double delta)
-	{
-		GD.Print("Idle Player velocity ");
 		Vector3 velocity = player.LinearVelocity;
 		GD.Print("Idle Player velocity " + velocity);
 
@@ -28,20 +22,20 @@ public partial class Idle : PlayerState
 		}
 	}
 
-	public new void PhysicsProcess(double delta)
+	public override void PhysicsProcess(double delta)
 	{
 	}
 
-	public new void UnhandledInput(InputEvent @event)
+	public override void UnhandledInput(InputEvent @event)
 	{
 	}
 
-	public new void EnterState(Dictionary<Variant, Variant> parameters = null)
+	public override void EnterState(Dictionary<Variant, Variant> parameters = null)
 	{
 		GD.Print("Entered State:", this.Name);
 	}
 
-	public new void ExitState(Dictionary<Variant, Variant> parameters = null)
+	public override void ExitState(Dictionary<Variant, Variant> parameters = null)
 	{
 	}
 }

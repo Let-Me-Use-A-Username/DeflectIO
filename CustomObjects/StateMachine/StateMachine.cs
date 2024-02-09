@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 
 public partial class StateMachine : Node
 {
@@ -17,7 +18,7 @@ public partial class StateMachine : Node
 
 		foreach (Node child in GetChildren())
 		{
-			if (child.GetType().IsSubclassOf(typeof(State)))
+			if (child is State)
 			{
 				child.Set("stateMachine", this);
 				states.Add(child.Name , (State)child);
@@ -26,23 +27,25 @@ public partial class StateMachine : Node
 
 		activeState = states["Idle"];
 		activeState.EnterState();
-		
 	}
 
 	public override void _Process(double delta)
 	{
-		activeState.Process(delta);
+		if (activeState != null)
+			activeState.Process(delta);
 	}
 
     public override void _PhysicsProcess(double delta)
     {
-		activeState.PhysicsProcess(delta);
+		if (activeState != null)
+			activeState.PhysicsProcess(delta);
     }
 
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        activeState.UnhandledInput(@event);
+		if (activeState != null)
+        	activeState.UnhandledInput(@event);
     }
 
 

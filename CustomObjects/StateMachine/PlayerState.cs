@@ -2,11 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class PlayerState : State
+public partial class PlayerState : Node, State
 {
-    //Player state needs to be aware of player variables 
-    // Such variables include : The player
-    // Stats such as speed, health, direction , etc
     public RigidBody3D player;
 	public StateMachine stateMachine;
 
@@ -23,23 +20,23 @@ public partial class PlayerState : State
         }
 	}
 
-	public new void Process(double delta)
+	public virtual void Process(double delta)
 	{
 	}
 
-	public new void PhysicsProcess(double delta)
+	public virtual void PhysicsProcess(double delta)
 	{
 	}
 
-	public new void UnhandledInput(InputEvent @event)
+	public virtual void UnhandledInput(InputEvent @event)
 	{
 	}
 
-	public new void EnterState(Dictionary<Variant, Variant> parameters = null)
+	public virtual void EnterState(Dictionary<Variant, Variant> parameters = null)
 	{
 	}
 
-	public new void ExitState(Dictionary<Variant, Variant> parameters = null)
+	public virtual void ExitState(Dictionary<Variant, Variant> parameters = null)
 	{
 	}
 }
