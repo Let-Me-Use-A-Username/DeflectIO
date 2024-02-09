@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmflwgvn0hea4"]
+[gd_scene load_steps=4 format=3 uid="uid://cmflwgvn0hea4"]
 
 [ext_resource type="Script" path="res://CustomObjects/StateMachine/StateMachine.cs" id="1_njt2n"]
 [ext_resource type="Script" path="res://CustomObjects/StateMachine/PlayerStates/Idle.cs" id="2_vyk6p"]
+[ext_resource type="Script" path="res://CustomObjects/StateMachine/PlayerStates/Move.cs" id="3_ot85d"]
 
 [node name="StateMachine" type="Node"]
 script = ExtResource("1_njt2n")
 
 [node name="Idle" type="Node" parent="."]
 script = ExtResource("2_vyk6p")
+
+[node name="Move" type="Node" parent="."]
+script = ExtResource("3_ot85d")

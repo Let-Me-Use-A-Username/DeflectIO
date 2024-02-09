@@ -7,8 +7,8 @@ public partial class PlayerState : State
     //Player state needs to be aware of player variables 
     // Such variables include : The player
     // Stats such as speed, health, direction , etc
-    public Node player;
-	StateMachine stateMachine;
+    public RigidBody3D player;
+	public StateMachine stateMachine;
 
 	public override void _Ready()
 	{
@@ -19,29 +19,27 @@ public partial class PlayerState : State
 
         if (player == null)
         {
-            player = Owner;
+            player = stateMachine.targetEntity as RigidBody3D;
         }
-
-        base._Ready();
 	}
 
-	public void Process(double delta)
+	public new void Process(double delta)
 	{
 	}
 
-	public void PhysicsProcess(double delta)
+	public new void PhysicsProcess(double delta)
 	{
 	}
 
-	public void UnhandledInput(InputEvent @event)
+	public new void UnhandledInput(InputEvent @event)
 	{
 	}
 
-	public void EnterState(Dictionary<Variant, Variant> parameters = null)
+	public new void EnterState(Dictionary<Variant, Variant> parameters = null)
 	{
 	}
 
-	public void ExitState(Dictionary<Variant, Variant> parameters = null)
+	public new void ExitState(Dictionary<Variant, Variant> parameters = null)
 	{
 	}
 }

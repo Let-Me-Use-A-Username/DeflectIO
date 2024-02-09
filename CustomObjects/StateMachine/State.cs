@@ -4,9 +4,8 @@ using System.Collections.Generic;
 
 public partial class State : Node
 {
-	public override void _Ready()
+	public void Start()
 	{
-        base._Ready();
 	}
 
 	public void Process(double delta)

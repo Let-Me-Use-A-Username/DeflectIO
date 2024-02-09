@@ -6,19 +6,21 @@ public partial class StateMachine : Node
 {
 	Signal playerStateTransition;
 
-	Dictionary<string, State> states;
+	public Dictionary<string, State> states;
 	public State activeState;
+	public Node targetEntity;
 
 	public override void _Ready()
 	{
+		targetEntity = Owner;
 		states = new Dictionary<string, State>();
 
 		foreach (Node child in GetChildren())
 		{
-			if (child is State)
+			if (child.GetType().IsSubclassOf(typeof(State)))
 			{
 				child.Set("stateMachine", this);
-				states.Add(child.Name , child as State);
+				states.Add(child.Name , (State)child);
 			}
 		}
 

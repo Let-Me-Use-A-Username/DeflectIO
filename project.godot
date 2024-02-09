@@ -27,6 +27,10 @@ file_logging/enable_file_logging=true
 
 project/assembly_name="DeflectIO"
 
+[editor]
+
+script/templates_search_path="res://ScriptTemplates"
+
 [file_customization]
 
 folder_colors={
