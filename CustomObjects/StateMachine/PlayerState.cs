@@ -6,18 +6,17 @@ public partial class PlayerState : Node, State
 {
     public RigidBody3D player;
 	public StateMachine stateMachine;
-
-	public override void _Ready()
+	
+	public override async void _Ready()
 	{
         if (stateMachine == null)
 		{
 			stateMachine = GetParent() as StateMachine;
 		}
 
-        if (player == null)
-        {
-            player = stateMachine.targetEntity as RigidBody3D;
-        }
+		await ToSignal(stateMachine, "ready");
+		
+        player = stateMachine.targetEntity as RigidBody3D;
 	}
 
 	public virtual void Process(double delta)

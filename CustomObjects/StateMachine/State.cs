@@ -4,10 +4,6 @@ using System.Collections.Generic;
 
 public interface State
 {
-	public void Start()
-	{
-	}
-
 	public void Process(double delta)
 	{
 	}

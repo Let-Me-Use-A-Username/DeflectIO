@@ -1,12 +1,9 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 
 public partial class StateMachine : Node
 {
-	Signal playerStateTransition;
-
 	public Dictionary<string, State> states;
 	public State activeState;
 	public Node targetEntity;
@@ -59,7 +56,6 @@ public partial class StateMachine : Node
 		activeState.ExitState(exit_message);
 		activeState = next_state;
 		activeState.EnterState(enter_message);
-		EmitSignal(playerStateTransition.ToString());
 	}
 }
 

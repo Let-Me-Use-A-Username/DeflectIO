@@ -1,16 +1,14 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public partial class Idle : PlayerState
 {
 	Vector3 movementInput;
 
-	public override void Process(double delta)
+    public override void Process(double delta)
 	{
-		Vector3 velocity = player.LinearVelocity;
-		GD.Print("Idle Player velocity " + velocity);
-
 		movementInput = Vector3.Zero;
 
 		movementInput.X = Input.GetAxis("left", "right");
@@ -18,7 +16,7 @@ public partial class Idle : PlayerState
 
 		if (movementInput != Vector3.Zero)
 		{
-			stateMachine.TransitionToState(this, (State)stateMachine.states["Move"], null, null);
+			stateMachine.TransitionToState(this, stateMachine.states["Move"]);
 		}
 	}
 

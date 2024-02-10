@@ -7,7 +7,16 @@ public partial class Move : PlayerState
 	public override void Process(double delta)
 	{
 		Vector3 velocity = player.LinearVelocity;
-		GD.Print("Move Player velocity " + velocity);
+		
+		if (velocity.X == 0 | velocity.Z == 0)
+		{
+			stateMachine.TransitionToState(this, stateMachine.states["Idle"]);
+		}
+	}
+
+	private void Hello()
+	{
+		GD.Print("hello");
 	}
 
 	public override void PhysicsProcess(double delta)
@@ -20,7 +29,7 @@ public partial class Move : PlayerState
 
 	public override void EnterState(Dictionary<Variant, Variant> parameters = null)
 	{
-		GD.Print("State:", this.Name);
+		GD.Print("Entered State:", this.Name);
 	}
 
 	public override void ExitState(Dictionary<Variant, Variant> parameters = null)
