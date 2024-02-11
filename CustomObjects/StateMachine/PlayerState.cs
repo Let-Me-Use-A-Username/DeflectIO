@@ -5,7 +5,9 @@ using System.Collections.Generic;
 public partial class PlayerState : Node, State
 {
     public RigidBody3D player;
+	public Dictionary<string, Variant> playerProperties;
 	public StateMachine stateMachine;
+	public Vector3 movementDirection;
 	
 	public override async void _Ready()
 	{
@@ -17,6 +19,8 @@ public partial class PlayerState : Node, State
 		await ToSignal(stateMachine, "ready");
 		
         player = stateMachine.targetEntity as RigidBody3D;
+		playerProperties.Add("velocity", player.LinearVelocity);
+		playerProperties.Add("direction", movementDirection);
 	}
 
 	public virtual void Process(double delta)

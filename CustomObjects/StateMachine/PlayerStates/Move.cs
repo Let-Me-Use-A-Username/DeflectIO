@@ -6,17 +6,12 @@ public partial class Move : PlayerState
 {
 	public override void Process(double delta)
 	{
-		Vector3 velocity = player.LinearVelocity;
+		Vector3 velocity = (Vector3)playerProperties["velocity"];
 		
 		if (velocity.X == 0 | velocity.Z == 0)
 		{
 			stateMachine.TransitionToState(this, stateMachine.states["Idle"]);
 		}
-	}
-
-	private void Hello()
-	{
-		GD.Print("hello");
 	}
 
 	public override void PhysicsProcess(double delta)

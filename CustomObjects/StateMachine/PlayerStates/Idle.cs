@@ -5,16 +5,15 @@ using System.Diagnostics;
 
 public partial class Idle : PlayerState
 {
-	Vector3 movementInput;
 
     public override void Process(double delta)
 	{
-		movementInput = Vector3.Zero;
+		movementDirection = Vector3.Zero;
 
-		movementInput.X = Input.GetAxis("left", "right");
-		movementInput.Z = Input.GetAxis("forward", "backward");
+		movementDirection.X = Input.GetAxis("left", "right");
+		movementDirection.Z = Input.GetAxis("forward", "backward");
 
-		if (movementInput != Vector3.Zero)
+		if (movementDirection != Vector3.Zero)
 		{
 			stateMachine.TransitionToState(this, stateMachine.states["Move"]);
 		}
