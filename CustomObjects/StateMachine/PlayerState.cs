@@ -25,6 +25,12 @@ public partial class PlayerState : Node, State
 
 	public virtual void Process(double delta)
 	{
+		movementDirection = Vector3.Zero;
+
+		movementDirection.X = Input.GetAxis("left", "right");
+		movementDirection.Z = Input.GetAxis("forward", "backward");
+
+		playerProperties["direction"] = movementDirection;
 	}
 
 	public virtual void PhysicsProcess(double delta)

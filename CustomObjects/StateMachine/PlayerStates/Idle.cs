@@ -8,11 +8,6 @@ public partial class Idle : PlayerState
 
     public override void Process(double delta)
 	{
-		movementDirection = Vector3.Zero;
-
-		movementDirection.X = Input.GetAxis("left", "right");
-		movementDirection.Z = Input.GetAxis("forward", "backward");
-
 		if (movementDirection != Vector3.Zero)
 		{
 			stateMachine.TransitionToState(this, stateMachine.states["Move"]);
