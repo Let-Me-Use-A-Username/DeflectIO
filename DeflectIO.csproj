@@ -6,5 +6,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
+
+  <ItemGroup>
+    <CSFile Include="*.cs" Exclude="ScriptTemplates\Node\StateMachineTemplate.cs"/>
+  </ItemGroup>
   
 </Project>

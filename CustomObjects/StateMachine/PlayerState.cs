@@ -7,7 +7,7 @@ public partial class PlayerState : Node, State
     public RigidBody3D player;
 	public Dictionary<string, Variant> playerProperties;
 	public StateMachine stateMachine;
-	public Vector3 movementDirection;
+	Vector3 movementDirection;
 	
 	public override async void _Ready()
 	{
@@ -17,10 +17,13 @@ public partial class PlayerState : Node, State
 		}
 
 		await ToSignal(stateMachine, "ready");
-		
         player = stateMachine.targetEntity as RigidBody3D;
-		playerProperties.Add("velocity", player.LinearVelocity);
-		playerProperties.Add("direction", movementDirection);
+
+		playerProperties = new Dictionary<string, Variant>
+        {
+            { "velocity", player.LinearVelocity },
+            { "direction", movementDirection }
+        };
 	}
 
 	public virtual void Process(double delta)
@@ -31,6 +34,7 @@ public partial class PlayerState : Node, State
 		movementDirection.Z = Input.GetAxis("forward", "backward");
 
 		playerProperties["direction"] = movementDirection;
+		playerProperties["velocity"] = player.LinearVelocity;
 	}
 
 	public virtual void PhysicsProcess(double delta)

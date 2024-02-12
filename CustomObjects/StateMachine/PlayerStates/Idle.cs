@@ -1,14 +1,17 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 public partial class Idle : PlayerState
 {
 
     public override void Process(double delta)
 	{
-		if (movementDirection != Vector3.Zero)
+		base.Process(delta);
+		
+		Vector3 direction = (Vector3)playerProperties["direction"];
+
+		if (direction != Vector3.Zero)
 		{
 			stateMachine.TransitionToState(this, stateMachine.states["Move"]);
 		}
@@ -24,7 +27,7 @@ public partial class Idle : PlayerState
 
 	public override void EnterState(Dictionary<Variant, Variant> parameters = null)
 	{
-		GD.Print("Entered State:", this.Name);
+		GD.Print("Entered State:", Name);
 	}
 
 	public override void ExitState(Dictionary<Variant, Variant> parameters = null)
