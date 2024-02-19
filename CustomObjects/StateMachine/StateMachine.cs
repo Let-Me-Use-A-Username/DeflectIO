@@ -1,15 +1,18 @@
 using Godot;
-using System;
+using Impentum.Events;
 using System.Collections.Generic;
 
 public partial class StateMachine : Node
 {
+	TransitionEvent transitionEvent = new();
 	public Dictionary<string, State> states;
 	public State activeState;
 	public Node targetEntity;
 
 	public override void _Ready()
 	{
+		EventManager.Listen<TransitionEvent>(transitionEvent, Transition);
+		
 		targetEntity = Owner;
 		states = new Dictionary<string, State>();
 
@@ -26,7 +29,7 @@ public partial class StateMachine : Node
 		activeState.EnterState();
 	}
 
-	public override void _Process(double delta)
+    public override void _Process(double delta)
 	{
 		if (activeState != null)
 			activeState.Process(delta);
@@ -45,18 +48,24 @@ public partial class StateMachine : Node
         	activeState.UnhandledInput(@event);
     }
 
+	
+    private void Transition(TransitionEvent @event)
+    {
+		State originState = @event.origin;
+		State nextState = @event.destination;
 
-	public void TransitionToState(State origin, State next_state, Dictionary<Variant, Variant> exit_message = null, Dictionary<Variant, Variant> enter_message = null)
-	{
-		if (!states.ContainsValue(next_state))
+		Dictionary<Variant, Variant> entryMessage = @event.entryMessage;
+		Dictionary<Variant, Variant> exitMessage = @event.exitMessage;
+
+		if (!states.ContainsValue(nextState))
 		{
 			return;
 		}
-
-		activeState.ExitState(exit_message);
-		activeState = next_state;
-		activeState.EnterState(enter_message);
-	}
+		
+		activeState.ExitState(exitMessage);
+		activeState = nextState;
+		activeState.EnterState(entryMessage);
+    }
 }
 
 

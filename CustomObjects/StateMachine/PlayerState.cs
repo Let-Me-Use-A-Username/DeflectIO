@@ -6,8 +6,11 @@ public partial class PlayerState : Node, State
 {
     public RigidBody3D player;
 	public Dictionary<string, Variant> playerProperties;
-	public StateMachine stateMachine;
 	Vector3 movementDirection;
+
+	public StateMachine stateMachine;
+	public Dictionary<Variant, Variant> entryMessage;
+	public Dictionary<Variant, Variant> exitMessage;
 	
 	public override async void _Ready()
 	{
@@ -24,6 +27,9 @@ public partial class PlayerState : Node, State
             { "velocity", player.LinearVelocity },
             { "direction", movementDirection }
         };
+
+		entryMessage = new();
+		exitMessage = new();
 	}
 
 	public virtual void Process(double delta)

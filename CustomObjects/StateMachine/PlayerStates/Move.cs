@@ -12,7 +12,10 @@ public partial class Move : PlayerState
 		
 		if (velocity.X == 0 & velocity.Z == 0)
 		{
-			stateMachine.TransitionToState(this, stateMachine.states["Idle"]);
+			TransitionEvent.Fire(this, 
+				stateMachine.states["Idle"], 
+				entryMessage,
+				exitMessage);
 		}
 	}
 

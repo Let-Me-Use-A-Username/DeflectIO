@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public partial class Idle : PlayerState
 {
-
     public override void Process(double delta)
 	{
 		base.Process(delta);
@@ -13,7 +12,10 @@ public partial class Idle : PlayerState
 
 		if (direction != Vector3.Zero)
 		{
-			stateMachine.TransitionToState(this, stateMachine.states["Move"]);
+			TransitionEvent.Fire(this, 
+				stateMachine.states["Move"], 
+				entryMessage,
+				exitMessage);
 		}
 	}
 
