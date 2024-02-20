@@ -26,7 +26,7 @@ public partial class StateMachineTemplate : Node
 		}
 
 		activeState = states["Idle"];
-		activeState.EnterState();
+		activeState.EnterState(new(){["animation"] = "knight_idle"});
 	}
 
     public override void _Process(double delta)

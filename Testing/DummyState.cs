@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 public partial class DummyState : Node, State
 {
-    public Node3D player;
-	public Dictionary<string, Variant> playerProperties;
+	public AnimationPlayer anim;
+
+    public RigidBody3D dummy;
+	public Dictionary<string, Variant> dummyProperties;
 	Vector3 movementDirection;
 
 	public StateMachineTemplate stateMachine;
-	public Dictionary<Variant, Variant> entryMessage;
-	public Dictionary<Variant, Variant> exitMessage;
 	
 	public override async void _Ready()
 	{
@@ -20,15 +20,15 @@ public partial class DummyState : Node, State
 		}
 
 		await ToSignal(stateMachine, "ready");
-        player = stateMachine.targetEntity as Node3D;
 
-		playerProperties = new Dictionary<string, Variant>
+		dummy = (RigidBody3D) stateMachine.targetEntity;
+		dummyProperties = new Dictionary<string, Variant>
         {
+			{ "velocity", dummy.LinearVelocity},
             { "direction", movementDirection }
         };
 
-		entryMessage = new();
-		exitMessage = new();
+		anim = dummy.GetNode<AnimationPlayer>("AssetRoot/AnimationPlayer");
 	}
 
 	public virtual void Process(double delta)
@@ -38,7 +38,7 @@ public partial class DummyState : Node, State
 		movementDirection.X = Input.GetAxis("left", "right");
 		movementDirection.Z = Input.GetAxis("forward", "backward");
 
-		playerProperties["direction"] = movementDirection;
+		dummyProperties["direction"] = movementDirection;
 	}
 
 	public virtual void PhysicsProcess(double delta)
@@ -49,11 +49,11 @@ public partial class DummyState : Node, State
 	{
 	}
 
-	public virtual void EnterState(Dictionary<Variant, Variant> parameters = null)
+	public virtual void EnterState(Dictionary<Variant, Variant> parameters)
 	{
 	}
 
-	public virtual void ExitState(Dictionary<Variant, Variant> parameters = null)
+	public virtual void ExitState(Dictionary<Variant, Variant> parameters)
 	{
 	}
 }

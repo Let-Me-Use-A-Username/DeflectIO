@@ -8,14 +8,17 @@ public partial class DummyWalk : DummyState
 	{
 		base.Process(delta);
 
-		Vector3 direction = (Vector3)playerProperties["direction"];
+		Vector3 direction = (Vector3)dummyProperties["direction"];
+
+		dummy.ApplyCentralForce(direction * 1200.0F * (float)delta);
 		
-		if (direction > Vector3.Zero)
+		if (direction == Vector3.Zero)
 		{
 			TransitionEvent.Fire(this, 
 				stateMachine.states["Idle"], 
-				entryMessage,
-				exitMessage);
+				new(){["animation"] = "knight_idle-loop"},
+				new(){}
+				);
 		}
 	}
 
@@ -27,12 +30,15 @@ public partial class DummyWalk : DummyState
 	{
 	}
 
-	public override void EnterState(Dictionary<Variant, Variant> parameters = null)
+	public override void EnterState(Dictionary<Variant, Variant> parameters)
 	{
 		GD.Print("Entered State:", Name);
+
+		anim.Play("Looped/knight_walk_in_place-loop");
+		
 	}
 
-	public override void ExitState(Dictionary<Variant, Variant> parameters = null)
+	public override void ExitState(Dictionary<Variant, Variant> parameters)
 	{
 	}
 }

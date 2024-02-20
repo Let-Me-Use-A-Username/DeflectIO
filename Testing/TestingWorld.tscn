@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cv8if34nqc8jn"]
 
-[ext_resource type="PackedScene" uid="uid://e6gfn20wmy18" path="res://Testing/Dummy.tscn" id="1_qsnjq"]
+[ext_resource type="PackedScene" uid="uid://bosi4udb60q1x" path="res://Testing/Dummy.tscn" id="1_qsnjq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rgb6n"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -40,3 +40,4 @@ transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_2dcfu")
 
 [node name="Dummy" parent="." instance=ExtResource("1_qsnjq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0795078, 0)
